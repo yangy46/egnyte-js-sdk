@@ -121,6 +121,12 @@ function getFileStream(pathFromRoot, versionEntryId) {
     var opts = {
         method: "GET",
         url: requestEngine.getEndpoint() + ENDPOINTS.fscontent + encodeURI(pathFromRoot),
+        pool: {
+            maxSockets: 50
+        },
+        headers: {
+            'Connection': 'close'
+        }
     }
     if (versionEntryId) {
         opts.params = opts.qs = { //xhr and request differ here
